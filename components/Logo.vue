@@ -1,8 +1,5 @@
 <template>
-  <LogoSVG class="logo">
-    <svg-icon icon="search" :hasFill="true"></svg-icon>
-    <!-- <img src="../static/logo.svg" /> -->
-  </LogoSVG>
+  <img src="../static/logo.svg" alt="logo Unbranded" />
 </template>
 
 <style lang="scss">
@@ -20,11 +17,8 @@
 </style>
 
 <script>
-import LogoSVG from '../static/logo.svg';
-import SvgIcon from './SvgIcon.vue';
 
 export default {
-  components: { LogoSVG, 'svg-icon': SvgIcon, },
 }
 </script>
 

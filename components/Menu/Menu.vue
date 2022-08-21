@@ -1,9 +1,12 @@
 <template>
-  <section class="menu">
-    <nav>
+  <section>
+    <nav class="navigation">
       <ul>
         <li>
-          <NuxtLink to="/viaggi">Viaggi</NuxtLink>
+          <dropdown-menu menu-title="Viaggi"></dropdown-menu>
+          <section :key="places.indexOf(place)" v-for="place in places" class="option">
+            <NuxtLink class="place">{{ place }}</NuxtLink>
+          </section>
         </li>
         <li>
           <NuxtLink to="/come-funziona">Come funziona</NuxtLink>
@@ -30,20 +33,27 @@
 
 <script>
 import Profile from "./Profile.vue";
+import DropdownMenu from "../DropdownMenu.vue";
 
 export default {
-    components: { Profile }
+  components: { Profile },
+  data: {
+    places: ['Europa', 'Asia', 'Africa', 'America', 'Oceania'],
+    active: false
+  },
+  methods: {
+    toggle() {
+      this.active = !this.active
+    }
+  }
 }
 </script>
 
 
-<style lang="scss">
-.menu {
-  background: transparent;
-}
-
-a.nuxt-link-active {
-  color: white;
+<style lang="scss" scoped>
+a.nuxt-link-active,
+.navigation li {
+  color: #fff;
 
   :hover {
     color: grey;
@@ -54,18 +64,23 @@ ul {
   list-style-type: none;
   padding: 0;
   display: flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 li {
-  font-family: "Gilroy-Black";
-  color: white;
+  font-family: "Gilroy-Medium";
+  color: #fff;
   margin: 0 0.5rem;
   padding: 0.25rem;
   font-size: 1.2rem;
   display: flex;
   align-items: center;
+  height: auto;
 }
 
 nav {
@@ -83,12 +98,12 @@ a:hover {
 }
 
 li.highlighted {
-  border: 2px none solid;
+  border: 2px transparent solid;
   border-radius: 0.3rem;
   color: red;
-  background-color: white;
+  background-color: #fff;
   padding: 0.25rem 0.6rem;
-  vertical-align: center;
+  text-align: center;
 
   a:hover {
     color: pink;

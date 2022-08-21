@@ -66,19 +66,4 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-
-  data() {
-    return {
-      parentMessage: 'Parent',
-      places: ['Europa', 'Asia', 'Africa', 'America', 'Oceania'],
-      menuItems: [
-        { page: places },
-        { page: 'info' },
-        { page: 'ages' },
-        { page: 'offers' },
-        { page: 'shifts' },
-        { page: 'faq' },
-      ],
-    }
-  },
 }
