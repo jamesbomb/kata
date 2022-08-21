@@ -18,7 +18,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['@/scss/_fonts.scss'],
+  css: ['@/assets/scss/_fonts.scss', '@/assets/scss/_main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -27,13 +27,36 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ['@nuxtjs/svg'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
+
+  svg: {
+    vueSvgLoader: {
+      // vue-svg-loader options
+    },
+    svgSpriteLoader: {
+      // svg-sprite-loader options
+    },
+    fileLoader: {
+      // file-loader options
+    },
+  },
+
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.svg$/,
+          loader: 'vue-svg-loader',
+        },
+      ],
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -45,10 +68,17 @@ export default {
   build: {},
 
   data() {
-  	return {
-	    parentMessage: 'Parent',
+    return {
+      parentMessage: 'Parent',
       places: ['Europa', 'Asia', 'Africa', 'America', 'Oceania'],
-    	menuItems: [{ page: places }, { page: 'info' }, {page: 'ages'}, {page: 'offers'}, {page: 'shifts'}, {page: 'faq'}],
-  	}
-	}
+      menuItems: [
+        { page: places },
+        { page: 'info' },
+        { page: 'ages' },
+        { page: 'offers' },
+        { page: 'shifts' },
+        { page: 'faq' },
+      ],
+    }
+  },
 }

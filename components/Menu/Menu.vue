@@ -21,16 +21,23 @@
           <NuxtLink to="/faq">FAQ</NuxtLink>
         </li>
         <li>
-          <ProfileSelect />
+          <Profile />
         </li>
       </ul>
     </nav>
   </section>
 </template>
 
+<script>
+import Profile from "./Profile.vue";
+
+export default {
+    components: { Profile }
+}
+</script>
+
 
 <style lang="scss">
-
 .menu {
   background: transparent;
 }
@@ -53,13 +60,16 @@ ul {
 
 li {
   font-family: "Gilroy-Black";
+  color: white;
   margin: 0 0.5rem;
   padding: 0.25rem;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
 nav {
-  padding: 0 1rem;
+  padding: 0;
 }
 
 a,
@@ -79,6 +89,7 @@ li.highlighted {
   background-color: white;
   padding: 0.25rem 0.6rem;
   vertical-align: center;
+
   a:hover {
     color: pink;
   }
