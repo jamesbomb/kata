@@ -1,14 +1,8 @@
 <template>
   <div class="header">
     <div class="header__LogoMenu">
-      <div class="header__LogoContainer">
-        <NuxtLink to="/" class="header__Logo">
-          <Logo />
-        </NuxtLink>
-        <div class="sep"></div>
-        <input class="header__logoInput" placeholder="Cerca su Unbranded" />
-      </div>
-      <Menu class="header__Menu" />
+      <LogoContainer />
+      <Menu />
     </div>
     <div class="header__Hero">
       <h1>Tutte le nostre destinazioni</h1>
@@ -16,6 +10,15 @@
     </div>
   </div>
 </template>
+
+<script>
+import LogoContainer from './Logo/LogoContainer.vue';
+
+export default {
+  name: 'Header',
+  components: { LogoContainer }
+}
+</script>
 
 <style lang="scss">
 .header {
@@ -75,69 +78,4 @@
     font-size: 1.6rem;
   }
 }
-
-.header__LogoContainer {
-  display: flex;
-  flex-flow: row nowrap;
-  align-content: center;
-  align-items: center;
-  flex: 0 1 auto;
-
-  .sep {
-    width: 2px;
-    height: 0.2rem;
-    display: block;
-    background: #fff;
-    margin-right: 0.8rem;
-    padding: 0.5rem 0 0.8rem 0;
-    margin-bottom: 0.3rem;
-  }
-}
-
-input {
-  all: unset;
-}
-
-.header__logoInput {
-  font-family: 'Gilroy-Medium';
-  font-size: 1.2rem;
-  color: #fff;
-  background: url('../assets/icons/search.svg') no-repeat left 1.3rem;
-  background-size: 1.5rem;
-  padding-left: 1.8rem;
-  line-height: 4rem;
-  padding-bottom: 0.3rem;
-
-  &::placeholder {
-    color: #fff;
-  }
-}
-
-.header__Logo {
-  flex: 2;
-}
-
-.header__Menu {
-  flex: auto;
-  background: transparent;
-  flex: 0 1 auto;
-  padding-bottom: 0.3rem;
-}
-
-@media (max-width: 1024px) {
-  .header__Menu {
-    display: none;
-  }
-
-}
 </style>
-
-<script>
-import Logo from './Logo.vue';
-import Menu from './menu/Menu.vue';
-
-export default {
-  name: 'Header',
-  components: { Logo, Menu }
-}
-</script>

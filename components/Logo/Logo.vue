@@ -1,5 +1,5 @@
 <template>
-  <img src="../static/logo.svg" alt="logo Unbranded" />
+  <img src="@/static/logo.svg" alt="logo Unbranded" />
 </template>
 
 <style lang="scss">

@@ -1,12 +1,9 @@
 <template>
-  <section>
-    <nav class="navigation">
+  <section id="menu" class="menu">
+    <nav>
       <ul>
         <li>
-          <dropdown-menu menu-title="Viaggi"></dropdown-menu>
-          <section :key="places.indexOf(place)" v-for="place in places" class="option">
-            <NuxtLink class="place">{{ place }}</NuxtLink>
-          </section>
+          <dropdown-menu menu-title="Viaggi" icon="chevron" />
         </li>
         <li>
           <NuxtLink to="/come-funziona">Come funziona</NuxtLink>
@@ -31,32 +28,43 @@
   </section>
 </template>
 
+
 <script>
-import Profile from "./Profile.vue";
-import DropdownMenu from "../DropdownMenu.vue";
+import Profile from "../Menu/Profile.vue";
+import DropdownMenu from '../Menu/DropdownMenu.vue';
 
 export default {
-  components: { Profile },
+  name: 'Menu',
+  components: { Profile, DropdownMenu},
   data: {
-    places: ['Europa', 'Asia', 'Africa', 'America', 'Oceania'],
-    active: false
-  },
-  methods: {
-    toggle() {
-      this.active = !this.active
-    }
+    show: false
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+.menu {
+  flex: auto;
+  background: transparent;
+  flex: 0 1 auto;
+  padding-bottom: 0.3rem;
+}
+
+@media (max-width: 1024px) {
+  .menu {
+    display: none;
+  }
+
+}
+
 a.nuxt-link-active,
-.navigation li {
+.menu li {
   color: #fff;
 
   :hover {
     color: grey;
+    cursor: pointer;
   }
 }
 
