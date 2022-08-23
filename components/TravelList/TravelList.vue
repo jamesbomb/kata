@@ -2,7 +2,9 @@
   <div class="travelList__wrapper">
     <Tabs class="travelList__tabs">
       <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name">
-        <div class="travelList__sectionTitle"><a :href="place.link">{{ place.sectionTitle }}</a></div>
+        <input type="hidden" :value="place.name.toLowerCase()" :model="activeLocation" />
+        <div class="travelList__sectionTitle"><a :href="place.link">{{ place.sectionTitle }}</a>
+        </div>
         <div class="travelList__sectionDescription"><span>{{ place.description }}</span></div>
       </Tab>
     </Tabs>
@@ -66,6 +68,7 @@ export default {
   data() {
     return {
       locations: undefined,
+      activeLocation: undefined
     }
   },
   props: {
@@ -85,10 +88,9 @@ export default {
     log(msg) {
       console.log(msg);
     },
-    saveFilter(locations) {
-      console.log('filter: ', locations);
-      filterKey = locations;
-    },
+    setActiveLocation(loc, event) {
+      this.activeLocation = event.target.value
+    }
   }
 }
 </script>
