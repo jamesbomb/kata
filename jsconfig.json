@@ -6,7 +6,8 @@
       "@/*": ["./*"],
       "~~/*": ["./*"],
       "@@/*": ["./*"]
-    }
+    },
+    "forceConsistentCasingInFileNames": false,
   },
   "vueCompilerOptions": {
     "experimentalDisableTemplateSupport": true

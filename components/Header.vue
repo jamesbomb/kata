@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header__LogoMenu">
       <LogoContainer />
-      <Menu />
+      <Menu :items="placesProp" :profile-items="profileLinksProp"></Menu>
     </div>
     <div class="header__Hero">
       <h1>Tutte le nostre destinazioni</h1>
@@ -13,16 +13,30 @@
 
 <script>
 import LogoContainer from './Logo/LogoContainer.vue';
+import Menu from '@/components/Menu/Menu.vue';
 
 export default {
   name: 'Header',
-  components: { LogoContainer }
+  components: { LogoContainer, Menu },
+  props: {
+    places: {
+      type: Array
+    },
+    profileLinks: {
+      type: Array
+    },
+  },
+  data() {
+    return {
+      placesProp: this.places,
+      profileLinksProp: this.profileLinks
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .header {
-  display: grid;
   padding: 3rem 1rem 0;
   justify-content: center;
   flex-flow: row nowrap;

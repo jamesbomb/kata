@@ -1,31 +1,36 @@
 <template>
   <div class="dropdown__wrapper">
-    <span class="dropdown__title" v-bind:style="{ 'background-image': `url(${require(`@/assets/icons/${icon}.svg`)})` }"
+    <span class="dropdown__title" :style="{ 'background-image': `url(${require(`@/assets/icons/${icon}.svg`)})` }"
       @click="dropdownOpen">{{
           menuTitle
       }}</span>
     <div v-if="show" class="dropdown__children">
       <ul class="dropdown__list">
-        <li v-for="item in items" :key="item.name">
-          <a href="">{{ item.name }}</a>
+        <li v-for="item in menuItems" :key="item.name">
+          <a :href=item.link>{{ item.name }}</a>
         </li>
       </ul>
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
   name: 'DropdownMenu',
-  props: [
-    "menuTitle",
-    "icon"
-  ],
+  props: {
+    menuTitle: {
+      type: String
+    },
+    icon: {
+      type: String
+    },
+    menuItems: {
+      type: Array
+    }
+  },
   data: function () {
     return {
       show: false,
-      items: [{ name: 'Europa' }, { name: 'Asia' }, { name: 'Africa' }, { name: 'America' }, { name: 'Oceania' }]
     }
   },
   methods: {

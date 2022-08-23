@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li>
-          <dropdown-menu menu-title="Viaggi" icon="chevron" />
+          <dropdown-menu menu-title="Viaggi" icon="chevron" :menu-items="places" />
         </li>
         <li>
           <NuxtLink to="/come-funziona">Come funziona</NuxtLink>
@@ -21,7 +21,7 @@
           <NuxtLink to="/faq">FAQ</NuxtLink>
         </li>
         <li>
-          <Profile />
+          <Profile :items="profileLinks" />
         </li>
       </ul>
     </nav>
@@ -35,9 +35,25 @@ import DropdownMenu from '../Menu/DropdownMenu.vue';
 
 export default {
   name: 'Menu',
-  components: { Profile, DropdownMenu},
-  data: {
-    show: false
+  components: { Profile, DropdownMenu },
+  props: {
+    items: {
+      type: Array
+    },
+    profileItems: {
+      type: Array
+    }
+  },
+  data() {
+    return {
+      show: false,
+      places: this.items,
+      profileLinks: this.profileItems
+    }
+  },
+  computed: {
+    console: () => console,
+    window: () => window,
   }
 }
 </script>
