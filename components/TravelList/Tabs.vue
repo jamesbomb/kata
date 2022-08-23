@@ -111,11 +111,12 @@ export default {
   flex: 1 1 100%;
   padding-top: 2rem;
   padding: 3rem 0;
-      border-bottom: 2px solid #efefef;
+  border-bottom: 2px solid #efefef;
 
   &>div {
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
   }
 }
 </style>

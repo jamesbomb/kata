@@ -1,7 +1,7 @@
 <template>
   <div class="travelList__wrapper">
     <Tabs class="travelList__tabs">
-      <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name" v-bind:selectedPlace="place">
+      <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name">
         <div class="travelList__sectionTitle"><a :href="place.link">{{ place.sectionTitle }}</a></div>
         <div class="travelList__sectionDescription"><span>{{ place.description }}</span></div>
       </Tab>
@@ -9,11 +9,13 @@
     <div class="travelList__tips">
       <h2>Trending tips</h2>
       <ul class="travelList__tipsGrid">
-        <li v-for="tip in data?.filter(item => item.primaryDestination.primaryContinent.slug.includes(selectedPlace))" :key="tip.id">
+        <li
+          v-for="tip in locations?.filter(item => item.primaryDestination.primaryContinent.slug.includes('europa')).slice(0, 8)"
+          :key="tip.id">
           <a :href="tip.primaryDestination?.primaryContinent.slug">
             <div class="travelList__tipSingle">
               <img
-                :src="require(`@/mock/assets${tip.thumbnailImage?.desktop?.thumbnailUrl !== undefined ? tip.thumbnailImage?.desktop?.thumbnailUrl : '/thumbnails/25302.jpg'}`)"
+                :src="require(`@/mock/assets${tip.thumbnailImage?.desktop?.thumbnailUrl !== undefined ? tip.thumbnailImage?.desktop?.thumbnailUrl : '/thumbnails/no-image.jpg'}`)"
                 :alt="tip.slug" class="travelList__tipsImg" />
               <div class="travelList__tipsContent">
                 <h3>{{ tip.title }}</h3>
@@ -25,7 +27,23 @@
       </ul>
     </div>
     <!-- <div class="travelList__trips"><pre>{{JSON.stringify(data, null, 4)}}</pre></div> -->
-    <div class="travelList__trips">{{ log(selectedPlace) }}</div>
+    <div class="travelList__trips">
+      <input type="text" placeholder="Cerca viaggi in Europa" />
+      <ul class="travelList__tipsGrid">
+        <li
+          v-for="tip in locations?.filter(item => item.primaryDestination.primaryContinent.slug.includes('europa')).slice(8, 24)"
+          :key="tip.id">
+          <a :href="tip.primaryDestination?.primaryContinent.slug">
+            <div class="travelList__tipSingle">
+              <div class="travelList__tipsContent">
+                <h3>{{ tip.title }}</h3>
+                <span>{{ tip.numberOfDays }} giorni</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -47,8 +65,7 @@ export default {
   },
   data() {
     return {
-      data: undefined,
-      selectedPlace: ''
+      locations: undefined,
     }
   },
   props: {
@@ -60,7 +77,7 @@ export default {
     axios
       .get(BASE_URL + 'data')
       .then(response => {
-        this.data = response.data
+        this.locations = response.data
       })
       .catch(error => console.log(error))
   },
@@ -68,9 +85,9 @@ export default {
     log(msg) {
       console.log(msg);
     },
-    saveFilter(place) {
-        console.log('filter: ', place);
-        filterKey = place;
+    saveFilter(locations) {
+      console.log('filter: ', locations);
+      filterKey = locations;
     },
   }
 }
@@ -85,8 +102,7 @@ export default {
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.3fr 1.9fr 0fr;
-  grid-gap: 0px 0px;
+  grid-template-rows: 0.3fr auto 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "travelList__tabs travelList__tabs travelList__tabs"
@@ -115,7 +131,8 @@ export default {
   flex: 1 1 100%;
   justify-content: flex-start;
   display: flex;
-  padding-top: 2rem;
+  padding: 2rem 0;
+  border-bottom: 2px solid #efefef;
   flex-flow: column;
 
   &>h2 {
@@ -125,7 +142,27 @@ export default {
 
 .travelList__trips {
   grid-area: travelList__trips;
-  padding-top: 2rem;
+  padding: 3rem 0;
+  display: flex;
+  flex-flow: row wrap;
+
+  .travelList__tipsContent {
+    padding-left: 0;
+    font-size: 0.9rem;
+  }
+
+  input {
+    background: url('@/assets/icons/search-dark.svg') no-repeat 0.5rem center;
+    background-size: 1.8rem;
+    border: 2px solid #efefef;
+    width: 100%;
+    border-radius: 0.4rem;
+    padding: 0.6rem 2.7rem;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+    flex: 1 1 100%;
+    margin-bottom: 2.5rem;
+  }
 }
 
 .travelList__tipsGrid {
@@ -161,6 +198,7 @@ export default {
   &>h3 {
     font-size: 1.2rem;
     font-family: "Gilroy-Medium";
+    margin-bottom: 0.5rem;
   }
 
   &>span {
@@ -172,7 +210,7 @@ export default {
   flex: 1;
   background: url('@/assets/icons/globe.svg') no-repeat left 0;
   background-size: 4rem;
-  padding-top: 4.5rem;
+  padding-top: 5rem;
   display: flex;
   align-items: flex-start;
 
