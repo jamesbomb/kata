@@ -1,7 +1,7 @@
 <template>
   <div class="travelList__wrapper">
     <Tabs class="travelList__tabs">
-      <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name">
+      <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name" v-bind:selectedPlace="place">
         <div class="travelList__sectionTitle"><a :href="place.link">{{ place.sectionTitle }}</a></div>
         <div class="travelList__sectionDescription"><span>{{ place.description }}</span></div>
       </Tab>
@@ -9,7 +9,7 @@
     <div class="travelList__tips">
       <h2>Trending tips</h2>
       <ul class="travelList__tipsGrid">
-        <li v-for="tip in data" :key="tip.id">
+        <li v-for="tip in data?.filter(item => item.primaryDestination.primaryContinent.slug.includes(selectedPlace))" :key="tip.id">
           <a :href="tip.primaryDestination?.primaryContinent.slug">
             <div class="travelList__tipSingle">
               <img
@@ -25,7 +25,7 @@
       </ul>
     </div>
     <!-- <div class="travelList__trips"><pre>{{JSON.stringify(data, null, 4)}}</pre></div> -->
-    <div class="travelList__trips">{{ log(data) }}</div>
+    <div class="travelList__trips">{{ log(selectedPlace) }}</div>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
   },
   data() {
     return {
-      data: undefined
+      data: undefined,
+      selectedPlace: ''
     }
   },
   props: {
@@ -63,22 +64,14 @@ export default {
       })
       .catch(error => console.log(error))
   },
-  computed: {
-    getData() {
-      data.map(item => {
-        console.log('tip', item[0][0]['id'])
-      })
-      return this.data?.map(item => item[0])
-    },
-    getImage() {
-
-    }
-
-  },
   methods: {
     log(msg) {
       console.log(msg);
-    }
+    },
+    saveFilter(place) {
+        console.log('filter: ', place);
+        filterKey = place;
+    },
   }
 }
 </script>
