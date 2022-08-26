@@ -1,27 +1,28 @@
 <template>
   <section id="menu" class="menu">
-    <nav>
+    <div class="menu__icon" @click="toggleMenu"></div>
+    <nav class="menu__nav" :class="{ 'menu__nav--open': this.menuOpen }">
       <ul>
         <li>
-          <dropdown-menu menu-title="Viaggi" icon="chevron" />
+          <dropdown-menu menu-title=" Viaggi" icon="chevron" :menu-items="places" />
         </li>
         <li>
-          <NuxtLink to="/come-funziona">Come funziona</NuxtLink>
+          <NuxtLink to="#">Come funziona</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/fasce-eta">Fasce d'età</NuxtLink>
+          <NuxtLink to="#">Fasce d'età</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/offerte">Offerte</NuxtLink>
+          <NuxtLink to="#">Offerte</NuxtLink>
         </li>
         <li class="highlighted">
-          <NuxtLink to="/turni-confermati">Turni confermati</NuxtLink>
+          <NuxtLink to="#">Turni confermati</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/faq">FAQ</NuxtLink>
+          <NuxtLink to="#">FAQ</NuxtLink>
         </li>
         <li>
-          <Profile />
+          <Profile :items="profileLinks" />
         </li>
       </ul>
     </nav>
@@ -35,9 +36,45 @@ import DropdownMenu from '../Menu/DropdownMenu.vue';
 
 export default {
   name: 'Menu',
-  components: { Profile, DropdownMenu},
-  data: {
-    show: false
+  components: { Profile, DropdownMenu },
+  props: {
+    items: {
+      type: Array
+    },
+    profileItems: {
+      type: Array
+    }
+  },
+  data() {
+    return {
+      show: false,
+      places: this.items,
+      profileLinks: this.profileItems,
+      menuOpen: false,
+      isOpened: false
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+      this.moveMenu()
+    },
+    moveMenu() {
+      const newParent = document.getElementsByClassName("header")[0];
+      const oldParent = document.getElementsByClassName('menu')[0];
+      const menu = document.getElementsByClassName("menu__nav")[0];
+      if (!this.isOpened) {
+        newParent.appendChild(oldParent.childNodes[2]);
+        this.isOpened = true
+      } else {
+        oldParent.appendChild(newParent.childNodes[3]);
+        this.isOpened = false
+      }
+    }
+  },
+  computed: {
+    //   console: () => console,
+    //   window: () => window,
   }
 }
 </script>
@@ -51,11 +88,35 @@ export default {
   padding-bottom: 0.3rem;
 }
 
+.menu__icon {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .menu {
+    padding-bottom: 0;
+    // position: relative;
+    flex: 0 1 auto;
+  }
+
+  .menu__icon {
+    display: block;
+    background: url('@/assets/icons/menu.svg') no-repeat center center;
+    cursor: pointer;
+    background-size: 3rem;
+    padding: 0 2rem 2rem 2rem;
+    height: 1rem;
+  }
+
+  .menu__nav {
     display: none;
   }
 
+  .menu__nav--open {
+    display: block;
+    // position: absolute;
+    // right: -50%;
+  }
 }
 
 a.nuxt-link-active,
