@@ -258,7 +258,7 @@ export default {
     font-size: 1.4rem;
   }
 
-  .tabs .is-active a:after {
+  .tabs ul li.is-active a:after {
     top: 3.9rem;
   }
 
