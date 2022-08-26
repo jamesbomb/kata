@@ -119,4 +119,12 @@ export default {
     align-items: center;
   }
 }
+
+@media (max-width: 1024px) {
+  .tabs__details {
+    &>div {
+      align-items: flex-start;
+    }
+  }
+}
 </style>

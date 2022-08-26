@@ -55,5 +55,25 @@ export default {
     color: #fff;
   }
 }
+
+@media (max-width: 1024px) {
+  .logo {
+    padding-top: 0.3rem;
+  }
+
+  .logo__separator {
+    display: none;
+  }
+
+  .logo__input {
+    margin-left: 1.5rem;
+    line-height: 2rem;
+    background-position: 0.6rem 0.4rem;
+    padding-left: 2.4rem;
+    padding-top: 0.1rem;
+    border-radius: 0.3rem;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
 </style>
 

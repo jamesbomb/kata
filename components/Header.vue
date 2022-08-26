@@ -45,7 +45,7 @@ export default {
   align-items: center;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 0.5fr 1.5fr 1fr;
   gap: 0px 0px;
   align-items: start;
@@ -90,6 +90,32 @@ export default {
   &>h3 {
     font-family: 'Gilroy-Medium';
     font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header__LogoMenu {
+    align-items: flex-start;
+  }
+
+  .header {
+    grid-template-areas:
+      "header__logoMenu header__logoMenu header__logoMenu"
+      "menu__nav--open menu__nav--open menu__nav--open"
+      "header__Hero header__Hero header__Hero";
+    grid-template-rows: 0.3fr auto 1fr;
+  }
+
+  .header__Hero {
+    padding-top: 4rem;
+  }
+
+  .menu__nav--open {
+    grid-area: menu__nav--open;
+  }
+
+  nav.menu__nav.menu__nav--open ul {
+    flex-flow: column;
   }
 }
 </style>

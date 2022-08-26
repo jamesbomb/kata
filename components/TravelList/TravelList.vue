@@ -3,12 +3,14 @@
     <Tabs class="travelList__tabs">
       <Tab v-for="(place, index) in places" :name="place.name" :selected="index === 0" :key="place.name">
         <input type="hidden" :value="place.name.toLowerCase()" :model="activeLocation" />
-        <div class="travelList__sectionTitle"><a :href="place.link">{{ place.sectionTitle }}</a>
+        <div class="travelList__sectionTitle"><a :href="place.link"><span class="travelList__sectionTitleText">{{
+            place.sectionTitle
+        }}</span><span class="travelList__arrowIcon"></span></a>
         </div>
         <div class="travelList__sectionDescription"><span>{{ place.description }}</span></div>
       </Tab>
     </Tabs>
-    <div class="travelList__tips">
+    <div class="travelList__tips travelList__tripsTrending">
       <h2>Trending tips</h2>
       <ul class="travelList__tipsGrid">
         <li
@@ -29,7 +31,7 @@
       </ul>
     </div>
     <!-- <div class="travelList__trips"><pre>{{JSON.stringify(data, null, 4)}}</pre></div> -->
-    <div class="travelList__trips">
+    <div class="travelList__trips travelList__tripsTips">
       <input type="text" placeholder="Cerca viaggi in Europa" />
       <ul class="travelList__tipsGrid">
         <li
@@ -172,7 +174,7 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem 2rem;
   align-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 
   a {
     text-decoration: none;
@@ -201,6 +203,11 @@ export default {
     font-size: 1.2rem;
     font-family: "Gilroy-Medium";
     margin-bottom: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
   &>span {
@@ -210,11 +217,9 @@ export default {
 
 .travelList__sectionTitle {
   flex: 1;
-  background: url('@/assets/icons/globe.svg') no-repeat left 0;
-  background-size: 4rem;
-  padding-top: 5rem;
   display: flex;
   align-items: flex-start;
+  padding-right: 1rem;
 
   a,
   a:active,
@@ -222,13 +227,80 @@ export default {
     font-family: 'Gilroy-Black';
     text-decoration: none;
     color: rgb(47, 165, 173);
-    background: url('@/assets/icons/rightArrow.svg') no-repeat center right;
-    padding-right: 1.5rem;
-    background-size: 1rem;
+    background: url('@/assets/icons/globe.svg') no-repeat left 0;
+    padding-top: 4rem;
+    background-size: 3.5rem;
+    position: relative;
+
+    .travelList__sectionTitleText {}
+
+    .travelList__arrowIcon {
+      background: url('@/assets/icons/rightArrow.svg') no-repeat center right;
+      padding: 0.5rem;
+    }
   }
 }
 
 .travelList__sectionDescription {
   flex: 3;
+}
+
+@media (max-width: 1024px) {
+
+  .travelList__sectionDescription {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .tabs a {
+    padding: 0.8em 0em;
+    font-size: 1.4rem;
+  }
+
+  .tabs .is-active a:after {
+    top: 3.9rem;
+  }
+
+  .travelList__sectionTitle {
+    padding: 0;
+  }
+
+  .travelList__sectionTitle a {
+    padding: 3rem;
+    background-size: 4rem;
+  }
+
+  .travelList__sectionTitle span {
+    display: none;
+  }
+
+  .travelList__wrapper {
+    padding: 3rem 2rem 0;
+  }
+
+  .travelList__tripsTrending .travelList__tipsGrid {
+    overflow-y: auto;
+    overflow-x: scroll;
+    padding: 1rem 0;
+    padding-right: 2rem;
+  }
+
+  .travelList__tripsTips .travelList__tipsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .travelList__tripsTips .travelList__tipsGrid li {
+    border-radius: 0.7rem;
+    border: 1px solid #ccc;
+    padding: 0.7rem;
+    height: -webkit-fill-available;
+  }
+
+  .travelList__tripsTips .travelList__tipsGrid li h3 {
+    -webkit-line-clamp: 2;
+  }
 }
 </style>

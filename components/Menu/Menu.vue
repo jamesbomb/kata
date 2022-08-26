@@ -1,9 +1,10 @@
 <template>
   <section id="menu" class="menu">
-    <nav>
+    <div class="menu__icon" @click="toggleMenu"></div>
+    <nav class="menu__nav" :class="{ 'menu__nav--open': this.menuOpen }">
       <ul>
         <li>
-          <dropdown-menu menu-title="Viaggi" icon="chevron" :menu-items="places" />
+          <dropdown-menu menu-title=" Viaggi" icon="chevron" :menu-items="places" />
         </li>
         <li>
           <NuxtLink to="#">Come funziona</NuxtLink>
@@ -48,12 +49,36 @@ export default {
     return {
       show: false,
       places: this.items,
-      profileLinks: this.profileItems
+      profileLinks: this.profileItems,
+      menuOpen: false,
+      isOpened: false
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+      this.moveMenu()
+    },
+    moveMenu() {
+      const newParent = document.getElementsByClassName("header")[0];
+      const oldParent = document.getElementsByClassName('menu')[0];
+      const menu = document.getElementsByClassName("menu__nav")[0];
+      if(!this.isOpened) {
+        while (oldParent.childNodes.length > 1) {
+          newParent.appendChild(oldParent.childNodes[2]);
+        }
+        this.isOpened = true
+      } else {
+        while (oldParent.childNodes.length > 2) {
+          oldParent.appendChild(newParent.childNodes[3]);
+        }
+        this.isOpened = false
+      }
     }
   },
   computed: {
-    console: () => console,
-    window: () => window,
+    //   console: () => console,
+    //   window: () => window,
   }
 }
 </script>
@@ -67,11 +92,35 @@ export default {
   padding-bottom: 0.3rem;
 }
 
+.menu__icon {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .menu {
+    padding-bottom: 0;
+    // position: relative;
+    flex: 0 1 auto;
+  }
+
+  .menu__icon {
+    display: block;
+    background: url('@/assets/icons/menu.svg') no-repeat center center;
+    cursor: pointer;
+    background-size: 3rem;
+    padding: 0 2rem 2rem 2rem;
+    height: 1rem;
+  }
+
+  .menu__nav {
     display: none;
   }
 
+  .menu__nav--open {
+    display: block;
+    // position: absolute;
+    // right: -50%;
+  }
 }
 
 a.nuxt-link-active,
