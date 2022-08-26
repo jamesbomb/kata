@@ -63,15 +63,11 @@ export default {
       const newParent = document.getElementsByClassName("header")[0];
       const oldParent = document.getElementsByClassName('menu')[0];
       const menu = document.getElementsByClassName("menu__nav")[0];
-      if(!this.isOpened) {
-        while (oldParent.childNodes.length > 1) {
-          newParent.appendChild(oldParent.childNodes[2]);
-        }
+      if (!this.isOpened) {
+        newParent.appendChild(oldParent.childNodes[2]);
         this.isOpened = true
       } else {
-        while (oldParent.childNodes.length > 2) {
-          oldParent.appendChild(newParent.childNodes[3]);
-        }
+        oldParent.appendChild(newParent.childNodes[3]);
         this.isOpened = false
       }
     }

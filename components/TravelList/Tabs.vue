@@ -70,11 +70,6 @@ export default {
     display: block;
   }
 
-  li.is-active a {
-    // border-bottom-color: red;
-    // color: red;
-  }
-
   .is-active a:after {
     content: "";
     height: 0.25rem;

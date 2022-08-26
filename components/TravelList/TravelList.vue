@@ -232,8 +232,6 @@ export default {
     background-size: 3.5rem;
     position: relative;
 
-    .travelList__sectionTitleText {}
-
     .travelList__arrowIcon {
       background: url('@/assets/icons/rightArrow.svg') no-repeat center right;
       padding: 0.5rem;
