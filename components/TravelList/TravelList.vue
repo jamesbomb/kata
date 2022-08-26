@@ -253,7 +253,7 @@ export default {
     -webkit-box-orient: vertical;
   }
 
-  .tabs a {
+  .tabs ul li a {
     padding: 0.8em 0em;
     font-size: 1.4rem;
   }
