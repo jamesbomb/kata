@@ -11,6 +11,7 @@
   border: 3px solid #fff;
   border-radius: 1.8rem;
   padding: 0.5rem 1.3rem;
+  height: 1.5rem;
   background: url('@/assets/icons/user.svg') no-repeat 0 center;
   background-size: 2.5rem;
 
@@ -21,7 +22,7 @@
 
 .profile__dropdown {
   position: relative;
-  top: 50%;
+  top: -2rem;
   right: -1.1rem;
 }
 </style>

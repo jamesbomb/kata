@@ -55,9 +55,9 @@ export default {
     "header__Hero header__Hero header__Hero"
     "header__Hero header__Hero header__Hero";
 
-  a.nuxt-link-active {
-    padding: 2rem 1rem;
-  }
+  // a.nuxt-link-active {
+  //   padding: 2rem 1rem;
+  // }
 }
 
 .header__LogoMenu {

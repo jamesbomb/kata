@@ -6,19 +6,19 @@
           <dropdown-menu menu-title="Viaggi" icon="chevron" :menu-items="places" />
         </li>
         <li>
-          <NuxtLink to="/come-funziona">Come funziona</NuxtLink>
+          <NuxtLink to="#">Come funziona</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/fasce-eta">Fasce d'età</NuxtLink>
+          <NuxtLink to="#">Fasce d'età</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/offerte">Offerte</NuxtLink>
+          <NuxtLink to="#">Offerte</NuxtLink>
         </li>
         <li class="highlighted">
-          <NuxtLink to="/turni-confermati">Turni confermati</NuxtLink>
+          <NuxtLink to="#">Turni confermati</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/faq">FAQ</NuxtLink>
+          <NuxtLink to="#">FAQ</NuxtLink>
         </li>
         <li>
           <Profile :items="profileLinks" />
